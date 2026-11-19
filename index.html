@@ -3,24 +3,117 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hola Mundo</title>
+<title>Cloud Architecture Quiz</title>
 <style>
+  :root {
+    --blue: #2563eb;
+    --border: #e2e8f0;
+    --bg: #eef1f5;
+    --text: #1e293b;
+    --muted: #64748b;
+  }
+  * { box-sizing: border-box; }
   body {
     margin: 0;
-    height: 100vh;
+    font-family: system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-family: system-ui, sans-serif;
-    background: #0f172a;
-    color: #f8fafc;
+    padding: 0 24px;
+    height: 56px;
+  }
+  header .title {
+    font-weight: 700;
+    font-size: 1.15rem;
+    margin-right: 32px;
+    white-space: nowrap;
+  }
+  nav {
+    display: flex;
+    gap: 28px;
+  }
+  nav button {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 8px 0;
+    border-bottom: 2px solid transparent;
+  }
+  nav button.active {
+    color: var(--blue);
+    border-bottom-color: var(--blue);
+    font-weight: 600;
+  }
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
+  .panel {
+    display: none;
+  }
+  .panel.active {
+    display: block;
+  }
+  .card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
   }
   h1 {
-    font-size: 3rem;
+    margin-top: 0;
   }
 </style>
 </head>
 <body>
-  <h1>¡Hola Mundo! 🌎</h1>
+  <header>
+    <div class="title">Cloud Architecture Quiz</div>
+    <nav>
+      <button class="nav-btn active" data-target="resumen">Resumen</button>
+      <button class="nav-btn" data-target="flashcard">Flashcard</button>
+      <button class="nav-btn" data-target="examen">Examen</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="resumen" class="panel active">
+      <div class="card">
+        <h1>¡Hola Mundo! 🌎</h1>
+      </div>
+    </section>
+
+    <section id="flashcard" class="panel">
+      <div class="card">
+        <h1>mis flashcard</h1>
+      </div>
+    </section>
+
+    <section id="examen" class="panel">
+      <div class="card">
+        <h1>quiz</h1>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const buttons = document.querySelectorAll('.nav-btn');
+    const panels = document.querySelectorAll('.panel');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.target).classList.add('active');
+      });
+    });
+  </script>
 </body>
 </html>
